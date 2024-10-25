@@ -53,3 +53,50 @@ io.on('connection', (socket) => {
         console.log('User  disconnected');
     });
 });
+// server.js
+const express = require('express');
+const http = require('http');
+const socketIo = require('socket.io');
+const cors = require('cors');
+
+const app = express();
+const server = http.createServer(app);
+const io = socketIo(server, {
+    cors: {
+        origin: '*', // Allow all origins for simplicity
+        methods: ['GET', 'POST']
+    }
+});
+
+// Middleware
+app.use(cors());
+app.use(express.static('public')); // Serve static files from the 'public' directory
+
+// Handle socket connections
+io.on('connection', (socket) => {
+    console.log('A user connected:', socket.id);
+
+    // Handle user registration
+    socket.on('register', (data) => {
+        console.log('User  registered:', data);
+        // You can save user data to a database here if needed
+    });
+
+    // Handle video chat signaling
+    socket.on('signal', (data) => {
+        socket.to(data.to).emit('signal', {
+            from: socket.id,
+            signal: data.signal
+        });
+    });
+
+    socket.on('disconnect', () => {
+        console.log('User  disconnected:', socket.id);
+    });
+});
+
+// Start the server
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});

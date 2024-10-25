@@ -1,22 +1,21 @@
 <img width="1280" alt="readme-banner" src="https://github.com/user-attachments/assets/35332e92-44cb-425b-9dff-27bcf1023c6c">
 
-# KVEEDcdcd 🎯
+# KVEED🎯
 
 
 ## Basic Details
-### Team Name: [Name]
+### Team Name: VISION
 
 
 ### Team Members
-- Team Lead: [Name] - [College]
-- Member 2: [Name] - [College]
-- Member 3: [Name] - [College]
+- Team Lead: [ILHAM] - [SSET]
+- Member 2: [JACOB] - [SSET]
 
 ### Project Description
-[2-3 lines about what your project does]
+[This website is about a vedio chat that helps people to interact and communicate with each other from different college which is under ktu.]
 
 ### The Problem (that doesn't exist)
-[What ridiculous problem are you solving?]
+decrease network
 
 ### The Solution (that nobody asked for)
 [How are you solving it? Keep it fun!]
@@ -24,15 +23,10 @@
 ## Technical Details
 ### Technologies/Components Used
 For Software:
-- [Languages used]
-- [Frameworks used]
+- css,html,javascript
+- react
 - [Libraries used]
-- [Tools used]
-
-For Hardware:
-- [List main components]
-- [List specifications]
-- [List tools required]
+- blackbox.ai
 
 ### Implementation
 For Software:

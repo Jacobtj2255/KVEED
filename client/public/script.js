@@ -5,6 +5,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentUserId = null;
     let localStream = null;
 
+    // Simulate server storage using localStorage
+    function initializeServerStorage() {
+        if (!localStorage.getItem('activeUsers')) {
+            localStorage.setItem('activeUsers', JSON.stringify({}));
+        }
+    }
+
     // Function to generate unique user ID
     function generateUserId() {
         return Math.random().toString(36).substr(2, 9);
@@ -13,23 +20,55 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to add user to active users
     function addActiveUser(userData) {
         const userId = generateUserId();
-        activeUsers.set(userId, {
+        const activeUsersStorage = JSON.parse(localStorage.getItem('activeUsers'));
+        
+        activeUsersStorage[userId] = {
             ...userData,
-            timestamp: new Date(),
-            stream: null
-        });
+            timestamp: new Date().getTime()
+        };
+        
+        localStorage.setItem('activeUsers', JSON.stringify(activeUsersStorage));
         return userId;
     }
 
     // Function to remove user from active users
     function removeActiveUser(userId) {
-        activeUsers.delete(userId);
+        const activeUsersStorage = JSON.parse(localStorage.getItem('activeUsers'));
+        delete activeUsersStorage[userId];
+        localStorage.setItem('activeUsers', JSON.stringify(activeUsersStorage));
         updateAvailableUsersList();
+    }
+
+    // Function to get all active users
+    function getActiveUsers() {
+        const activeUsersStorage = JSON.parse(localStorage.getItem('activeUsers'));
+        const currentTime = new Date().getTime();
+        
+        // Remove users who haven't updated their timestamp in the last 30 seconds
+        Object.keys(activeUsersStorage).forEach(userId => {
+            if (currentTime - activeUsersStorage[userId].timestamp > 30000) {
+                delete activeUsersStorage[userId];
+            }
+        });
+        
+        localStorage.setItem('activeUsers', JSON.stringify(activeUsersStorage));
+        return activeUsersStorage;
+    }
+
+    // Function to update user timestamp
+    function updateUserTimestamp(userId) {
+        const activeUsersStorage = JSON.parse(localStorage.getItem('activeUsers'));
+        if (activeUsersStorage[userId]) {
+            activeUsersStorage[userId].timestamp = new Date().getTime();
+            localStorage.setItem('activeUsers', JSON.stringify(activeUsersStorage));
+        }
     }
 
     // Function to update the available users list
     function updateAvailableUsersList() {
+        const activeUsersStorage = getActiveUsers();
         const availableUsersContainer = document.getElementById('availableUsers');
+        
         if (!availableUsersContainer) {
             const container = document.createElement('div');
             container.id = 'availableUsers';
@@ -37,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('#videoChat').appendChild(container);
         }
 
-        const usersHtml = Array.from(activeUsers.entries())
+        const usersHtml = Object.entries(activeUsersStorage)
             .filter(([id, _]) => id !== currentUserId)
             .map(([id, user]) => `
                 <div class="user-card" onclick="connectWithUser('${id}')">
@@ -51,9 +90,20 @@ document.addEventListener('DOMContentLoaded', () => {
             `).join('');
 
         document.getElementById('availableUsers').innerHTML = 
-            `<h3>Available Users (${activeUsers.size - 1})</h3>
+            `<h3>Available Users (${Object.keys(activeUsersStorage).length - 1})</h3>
              <div class="users-grid">${usersHtml}</div>`;
     }
+
+    // Initialize storage
+    initializeServerStorage();
+
+    // Start periodic updates
+    setInterval(() => {
+        if (currentUserId) {
+            updateUserTimestamp(currentUserId);
+            updateAvailableUsersList();
+        }
+    }, 5000); // Update every 5 seconds
 
     // Handle form submission
     document.getElementById('registrationForm').addEventListener('submit', async function(event) {
@@ -100,11 +150,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to connect with another user
     window.connectWithUser = function(userId) {
-        const remoteUser = activeUsers.get(userId);
+        const activeUsersStorage = getActiveUsers();
+        const remoteUser = activeUsersStorage[userId];
         if (remoteUser) {
             const remoteVideo = document.getElementById('remoteVideo');
             // In a real implementation, this would involve WebRTC signaling
-            alert(`Connecting with user from ${remoteUser.college}`);
+            alert(Connecting with user from ${remoteUser.college});
         }
     };
 
@@ -125,5 +176,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const remoteVideo = document.getElementById('remoteVideo');
         localVideo.srcObject = null;
         remoteVideo.srcObject = null;
+    });
+
+    // Clean up when the window is closed
+    window.addEventListener('beforeunload', () => {
+        if (currentUserId) {
+            removeActiveUser(currentUserId);
+        }
     });
 });

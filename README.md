@@ -8,46 +8,43 @@
 
 
 ### Team Members
-- Team Lead: [ILHAM] - [SSET]
-- Member 2: [JACOB] - [SSET]
+- Team Lead: ILHAM - SSET
+- Member 2: JACOB - SSET
 
 ### Project Description
-[This website is about a vedio chat that helps people to interact and communicate with each other from different college which is under ktu.]
+This website is about a vedio chat that helps people to interact and communicate with each other from different college which is under ktu.
 
 ### The Problem (that doesn't exist)
-decrease network
+decreased online face to face networking 
 
 ### The Solution (that nobody asked for)
-[How are you solving it? Keep it fun!]
+ktu omegle - KVEED
 
 ## Technical Details
 ### Technologies/Components Used
 For Software:
 - css,html,javascript
 - react
-- [Libraries used]
 - blackbox.ai
 
-### Implementation
-For Software:
-# Installation
-[commands]
 
-# Run
-[commands]
 
 ### Project Documentation
-For Software:
+For Software: github
 
 # Screenshots (Add at least 3)
 ![Screenshot1](Add screenshot 1 here with proper name)
-*Add caption explaining what this shows*
+registration area
+![image](https://github.com/user-attachments/assets/14f17f80-f10d-47a8-a821-0b83f2e5cb29)
+
+
 
 ![Screenshot2](Add screenshot 2 here with proper name)
-*Add caption explaining what this shows*
-
+video chat area
+![image](https://github.com/user-attachments/assets/a1167b10-8d0e-46f6-b14e-ab960b8b9518)
 ![Screenshot3](Add screenshot 3 here with proper name)
-*Add caption explaining what this shows*
+registration
+![image](https://github.com/user-attachments/assets/b4bbc8ff-b2ff-4f24-a490-53e3cebb9361)
 
 # Diagrams
 ![Workflow](Add your workflow/architecture diagram here)
@@ -81,9 +78,9 @@ For Hardware:
 [Add any extra demo materials/links]
 
 ## Team Contributions
-- [Name 1]: [Specific contributions]
-- [Name 2]: [Specific contributions]
-- [Name 3]: [Specific contributions]
+- Jacob - most of the code and setup
+- Ilham - branching, deployment
+
 
 ---
 Made with ❤️ at TinkerHub Useless Projects 

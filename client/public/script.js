@@ -155,8 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (remoteUser) {
             const remoteVideo = document.getElementById('remoteVideo');
             // In a real implementation, this would involve WebRTC signaling
-            alert('Connecting with user from ${remoteUser.college}');
-        }
+            alert(`Connecting with user from ${remoteUser.college}`);        }
     };
 
     // Handle leave chat

@@ -61,22 +61,23 @@ For Hardware:
 *Add caption explaining the schematic*
 
 # Build Photos
-![Components](Add photo of your components here)
-*List out all components shown*
+![Components]
+![image](https://github.com/user-attachments/assets/1c816cf5-9b33-446c-8979-57090d73f428)
 
-![Build](Add photos of build process here)
-*Explain the build steps*
+
+![Build]
+![image](https://github.com/user-attachments/assets/97e44a92-0a42-475f-9daf-9e1a59002470)
+
 
 ![Final](Add photo of final product here)
-*Explain the final build*
+![image](https://github.com/user-attachments/assets/e1a5d104-ad55-4eb3-a331-93a3cfe81b57)
+
 
 ### Project Demo
 # Video
 (https://drive.google.com/file/d/1-cHQJUIWfAxnBVhpFiI4wz-9Gf8ucufv/view?usp=drivesdk)
 shows how our website moves from registration page to video chat page.
 
-# Additional Demos
-[Add any extra demo materials/links]
 
 ## Team Contributions
 - Jacob - most of the code and setup

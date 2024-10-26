@@ -41,7 +41,8 @@ registration area
 
 ![Screenshot2](Add screenshot 2 here with proper name)
 video chat area
-![image](https://github.com/user-attachments/assets/a1167b10-8d0e-46f6-b14e-ab960b8b9518)
+![image](https://github.com/user-attachments/assets/112633c3-32df-4b52-a40e-19df9d603d16)
+
 ![Screenshot3](Add screenshot 3 here with proper name)
 registration
 ![image](https://github.com/user-attachments/assets/b4bbc8ff-b2ff-4f24-a490-53e3cebb9361)

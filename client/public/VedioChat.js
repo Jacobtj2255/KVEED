@@ -1,26 +1,79 @@
-const socket = io(); // Connect to the WebSocket server
+// script.js
+document.getElementById('registrationForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent the default form submission
 
-async function startVideoChat() {
-    const localVideo = document.getElementById('localVideo');
-    const stream = await navigator.mediaDevices.getUser Media({ video: true });
-    localVideo.srcObject = stream;
+    // Here you can handle registration logic (e.g., save data to a server)
+    const college = document.getElementById('college').value;
+    const graduationYear = document.getElementById('graduationYear').value;
+    const age = document.getElementById('age').value;
 
-    // Handle signaling for video chat
-    socket.on('signal', (data) => {
-        // Handle incoming signaling data (e.g., WebRTC signaling)
-        console.log('Received signal:', data);
-    });
+    // Display the video chat section and hide the registration section
+    document.getElementById('registration').style.display = 'none';
+    document.getElementById('videoChat').style.display = 'block';
 
-    // Example of sending a signal (you would implement your WebRTC logic here)
-    // socket.emit('signal', { to: 'someOtherSocketId', signal: 'yourSignalData' });
+    // Initialize video chat (this can be replaced with actual video chat logic)
+    startVideoChat();
+});
+
+function startVideoChat() {
+    // Placeholder for video chat initialization logic
+    console.log("Video chat started!");
+    // Here you would set up WebRTC or any other video chat logic
 }
 
-// Start the video chat when the page loads
-window.onload = startVideoChat;
+// Optional: Add functionality to leave the chat
+document.getElementById('leaveChat').addEventListener('click', function() {
+    // Logic to leave chat
+    document.getElementById('videoChat').style.display = 'none';
+    document.getElementById('registration').style.display = 'block';
+    console.log("Left the chat!");
+});
+// Connect to the WebSocket server
+const socket = io();
+
+// Handle form submission
+document.getElementById('registrationForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const college = document.getElementById('college').value;
+    const graduationYear = document.getElementById('graduationYear').value;
+    const age = document.getElementById('age').value;
+
+    // Age validation
+    if (age < 18 || age > 28) {
+        alert('Age must be between 18 and 28.');
+        return;
+    }
+
+    // Send registration data to the server
+    socket.emit('register', { college, graduationYear, age });
+
+    // Hide registration and show video chat
+    document.getElementById('registration').style.display = 'none';
+    document.getElementById('videoChat').style.display = 'block';
+
+    // Start video chat
+    startVideoChat();
+});
+
+// Function to start video chat
+async function startVideoChat() {
+    const localVideo = document.getElementById('localVideo');
+
+    try {
+        // Access the user's webcam
+        const stream = await navigator.mediaDevices.getUser Media({ video: true });
+        localVideo.srcObject = stream;
+    } catch (error) {
+        console.error('Error accessing webcam: ', error);
+        alert('Could not access the webcam. Please check your permissions.');
+    }
+}
 
 // Leave chat button functionality
 document.getElementById('leaveChat').addEventListener('click', function() {
-    console.log('Leaving chat...');
     // Logic to leave the chat
-    window.location.href = 'index.html'; // Redirect back to the registration page
+    console.log('Leaving chat...');
+    document.getElementById('videoChat').style.display = 'none';
+    document.getElementById('registration').style.display = 'block';
 });
